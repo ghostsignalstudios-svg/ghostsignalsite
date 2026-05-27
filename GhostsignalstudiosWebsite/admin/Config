@@ -1,1 +1,27 @@
+backend:
+  name: github
+  repo: ghostsignalstudios-svg/ghostsignalsite
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
+publish_mode: editorial_workflow
+
+media_folder: "images/uploads"
+
+public_folder: "/images/uploads"
+
+site_url: https://ghostsignalstudios.com
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "GhostsignalstudiosWebsite/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Tag", name: "tag", widget: "string", default: "Gaming" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
