@@ -10,12 +10,12 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #080a0e; --surface: #0e1117; --accent: #4af0c4;
+    --bg: #080a0e; --surface: #0e1117; --accent: #e2e2e2;
     --text: #e8eaf0; --muted: #5a6070;
-    --border: rgba(74,240,196,0.15); --glow: rgba(74,240,196,0.08);
+    --border: rgba(226,226,226,0.15); --glow: rgba(226,226,226,0.06);
   }
   html, body { background: var(--bg); color: var(--text); font-family: 'Space Mono', monospace; min-height: 100vh; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,240,196,0.04) 0%, transparent 70%); pointer-events: none; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226,226,226,0.04) 0%, transparent 70%); pointer-events: none; }
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; border-bottom: 1px solid var(--border); background: rgba(8,10,14,0.85); backdrop-filter: blur(12px); }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.15em; color: var(--accent); text-decoration: none; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
