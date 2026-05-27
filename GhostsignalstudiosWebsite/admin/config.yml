@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ghostsignalstudios-svg/ghostsignalsite
   branch: main
 
 media_folder: "GhostsignalstudiosWebsite/images/uploads"
