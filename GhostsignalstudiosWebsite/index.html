@@ -12,12 +12,12 @@
     --bg: #080a0e;
     --surface: #0e1117;
     --surface2: #131720;
-    --accent: #4af0c4;
-    --accent2: #1a6b58;
+    --accent: #e2e2e2;
+    --accent2: #a0a0a0;
     --text: #e8eaf0;
     --muted: #5a6070;
-    --border: rgba(74,240,196,0.15);
-    --glow: rgba(74,240,196,0.08);
+    --border: rgba(226,226,226,0.15);
+    --glow: rgba(226,226,226,0.06);
   }
 
   html, body { background: var(--bg); color: var(--text); font-family: 'Space Mono', monospace; min-height: 100vh; overflow-x: hidden; }
@@ -25,7 +25,7 @@
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,240,196,0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226,226,226,0.04) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -112,10 +112,10 @@
   }
 
   .btn-primary {
-    background: var(--accent); color: var(--bg);
+    background: var(--accent); color: #080a0e;
     clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   }
-  .btn-primary:hover { background: #7af8d8; transform: translateY(-2px); }
+  .btn-primary:hover { background: #ffffff; transform: translateY(-2px); }
 
   .btn-ghost {
     background: transparent;
@@ -180,7 +180,7 @@
     transition: border-color 0.3s, transform 0.3s;
     cursor: pointer;
   }
-  .work-card:hover { border-color: rgba(74,240,196,0.4); transform: translateY(-4px); }
+  .work-card:hover { border-color: rgba(226,226,226,0.4); transform: translateY(-4px); }
   .work-card:hover .card-overlay { opacity: 1; }
 
   .card-img {
@@ -200,7 +200,7 @@
 
   .card-overlay {
     position: absolute; inset: 0;
-    background: rgba(74,240,196,0.05);
+    background: rgba(226,226,226,0.05);
     opacity: 0; transition: opacity 0.3s;
   }
 
@@ -294,20 +294,20 @@
     <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="rg" cx="50%" cy="0%" r="60%">
-          <stop offset="0%" stop-color="#4af0c4" stop-opacity="0.06"/>
-          <stop offset="100%" stop-color="#4af0c4" stop-opacity="0"/>
+          <stop offset="0%" stop-color="#e2e2e2" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#e2e2e2" stop-opacity="0"/>
         </radialGradient>
       </defs>
       <rect width="1200" height="800" fill="url(#rg)"/>
-      <line x1="0" y1="400" x2="1200" y2="400" stroke="#4af0c4" stroke-opacity="0.04" stroke-width="1"/>
-      <line x1="600" y1="0" x2="600" y2="800" stroke="#4af0c4" stroke-opacity="0.04" stroke-width="1"/>
-      <line x1="0" y1="0" x2="1200" y2="800" stroke="#4af0c4" stroke-opacity="0.02" stroke-width="1"/>
-      <line x1="1200" y1="0" x2="0" y2="800" stroke="#4af0c4" stroke-opacity="0.02" stroke-width="1"/>
-      <circle cx="600" cy="400" r="250" fill="none" stroke="#4af0c4" stroke-opacity="0.03" stroke-width="1"/>
-      <circle cx="600" cy="400" r="350" fill="none" stroke="#4af0c4" stroke-opacity="0.02" stroke-width="1"/>
-      <circle cx="600" cy="400" r="450" fill="none" stroke="#4af0c4" stroke-opacity="0.015" stroke-width="1"/>
-      <path d="M 0 400 Q 200 350 400 410 T 800 390 T 1200 400" stroke="#4af0c4" stroke-opacity="0.12" stroke-width="1" fill="none"/>
-      <path d="M 0 410 Q 300 380 500 420 T 900 395 T 1200 410" stroke="#4af0c4" stroke-opacity="0.07" stroke-width="1" fill="none"/>
+      <line x1="0" y1="400" x2="1200" y2="400" stroke="#e2e2e2" stroke-opacity="0.04" stroke-width="1"/>
+      <line x1="600" y1="0" x2="600" y2="800" stroke="#e2e2e2" stroke-opacity="0.04" stroke-width="1"/>
+      <line x1="0" y1="0" x2="1200" y2="800" stroke="#e2e2e2" stroke-opacity="0.02" stroke-width="1"/>
+      <line x1="1200" y1="0" x2="0" y2="800" stroke="#e2e2e2" stroke-opacity="0.02" stroke-width="1"/>
+      <circle cx="600" cy="400" r="250" fill="none" stroke="#e2e2e2" stroke-opacity="0.03" stroke-width="1"/>
+      <circle cx="600" cy="400" r="350" fill="none" stroke="#e2e2e2" stroke-opacity="0.02" stroke-width="1"/>
+      <circle cx="600" cy="400" r="450" fill="none" stroke="#e2e2e2" stroke-opacity="0.015" stroke-width="1"/>
+      <path d="M 0 400 Q 200 350 400 410 T 800 390 T 1200 400" stroke="#e2e2e2" stroke-opacity="0.12" stroke-width="1" fill="none"/>
+      <path d="M 0 410 Q 300 380 500 420 T 900 395 T 1200 410" stroke="#e2e2e2" stroke-opacity="0.07" stroke-width="1" fill="none"/>
     </svg>
   </div>
 
@@ -351,11 +351,11 @@
       <div class="card-img card-img-review">
         <svg class="card-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
           <rect width="400" height="225" fill="#0e1117"/>
-          <text x="200" y="118" text-anchor="middle" font-family="Space Mono" font-size="11" fill="#4af0c4" opacity="0.15" letter-spacing="3">BLOG</text>
-          <line x1="60" y1="85" x2="220" y2="85" stroke="#4af0c4" stroke-opacity="0.08" stroke-width="1"/>
-          <line x1="60" y1="105" x2="280" y2="105" stroke="#4af0c4" stroke-opacity="0.06" stroke-width="1"/>
-          <line x1="60" y1="125" x2="250" y2="125" stroke="#4af0c4" stroke-opacity="0.06" stroke-width="1"/>
-          <line x1="60" y1="145" x2="200" y2="145" stroke="#4af0c4" stroke-opacity="0.04" stroke-width="1"/>
+          <text x="200" y="118" text-anchor="middle" font-family="Space Mono" font-size="11" fill="#e2e2e2" opacity="0.15" letter-spacing="3">BLOG</text>
+          <line x1="60" y1="85" x2="220" y2="85" stroke="#e2e2e2" stroke-opacity="0.08" stroke-width="1"/>
+          <line x1="60" y1="105" x2="280" y2="105" stroke="#e2e2e2" stroke-opacity="0.06" stroke-width="1"/>
+          <line x1="60" y1="125" x2="250" y2="125" stroke="#e2e2e2" stroke-opacity="0.06" stroke-width="1"/>
+          <line x1="60" y1="145" x2="200" y2="145" stroke="#e2e2e2" stroke-opacity="0.04" stroke-width="1"/>
         </svg>
         <div class="card-overlay"></div>
       </div>
@@ -370,10 +370,10 @@
       <div class="card-img card-img-dev">
         <svg class="card-pattern" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
           <rect width="400" height="225" fill="#0e1117"/>
-          <text x="200" y="100" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#4af0c4" opacity="0.15" letter-spacing="3">UPCOMING</text>
-          <text x="200" y="130" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#4af0c4" opacity="0.1" letter-spacing="3">PROJECTS</text>
-          <rect x="140" y="85" width="120" height="55" fill="none" stroke="#4af0c4" stroke-opacity="0.08" stroke-width="1"/>
-          <line x1="140" y1="112" x2="260" y2="112" stroke="#4af0c4" stroke-opacity="0.06" stroke-width="1"/>
+          <text x="200" y="100" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#e2e2e2" opacity="0.15" letter-spacing="3">UPCOMING</text>
+          <text x="200" y="130" text-anchor="middle" font-family="Space Mono" font-size="10" fill="#e2e2e2" opacity="0.1" letter-spacing="3">PROJECTS</text>
+          <rect x="140" y="85" width="120" height="55" fill="none" stroke="#e2e2e2" stroke-opacity="0.08" stroke-width="1"/>
+          <line x1="140" y1="112" x2="260" y2="112" stroke="#e2e2e2" stroke-opacity="0.06" stroke-width="1"/>
         </svg>
         <div class="card-overlay"></div>
       </div>
