@@ -5,225 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Ghost Signal Studios</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #080a0e;
-    --surface: #0e1117;
-    --accent: #4af0c4;
-    --text: #e8eaf0;
-    --muted: #5a6070;
-    --border: rgba(74,240,196,0.15);
-    --glow: rgba(74,240,196,0.08);
+    --bg: #080a0e; --surface: #0e1117; --accent: #4af0c4;
+    --text: #e8eaf0; --muted: #5a6070;
+    --border: rgba(74,240,196,0.15); --glow: rgba(74,240,196,0.08);
   }
-
   html, body { background: var(--bg); color: var(--text); font-family: 'Space Mono', monospace; min-height: 100vh; overflow-x: hidden; }
-
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,240,196,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
-    border-bottom: 1px solid var(--border);
-    background: rgba(8,10,14,0.85);
-    backdrop-filter: blur(12px);
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    text-decoration: none;
-  }
-
+  body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,240,196,0.04) 0%, transparent 70%); pointer-events: none; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; border-bottom: 1px solid var(--border); background: rgba(8,10,14,0.85); backdrop-filter: blur(12px); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.15em; color: var(--accent); text-decoration: none; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none; transition: color 0.2s;
-  }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-
-  .page-header {
-    position: relative; z-index: 1;
-    padding: 10rem 3rem 4rem;
-    max-width: 1100px; margin: 0 auto;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .page-eyebrow {
-    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 1rem;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
-  }
-
-  .page-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    line-height: 0.9; letter-spacing: 0.04em;
-    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
-  }
-
-  .page-desc {
-    margin-top: 1.5rem;
-    font-size: 0.8rem; line-height: 1.9; color: var(--muted);
-    max-width: 500px;
-    opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
-  }
-
-  .blog-container {
-    position: relative; z-index: 1;
-    max-width: 1100px; margin: 0 auto;
-    padding: 4rem 3rem 6rem;
-  }
-
-  .empty-state {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    padding: 5rem 3rem;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-
-  .empty-state::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-  }
-
-  .empty-icon {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 5rem; color: var(--accent); opacity: 0.1;
-    line-height: 1; margin-bottom: 1.5rem;
-    display: block;
-  }
-
-  .empty-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem; letter-spacing: 0.08em;
-    margin-bottom: 1rem;
-  }
-
-  .empty-desc {
-    font-size: 0.75rem; line-height: 1.9; color: var(--muted);
-    max-width: 380px; margin: 0 auto 2rem;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none; cursor: pointer; border: none;
-    transition: all 0.2s;
-  }
-
-  .btn-ghost {
-    background: transparent; color: var(--accent);
-    border: 1px solid var(--border);
-    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  }
-  .btn-ghost:hover { border-color: var(--accent); background: var(--glow); transform: translateY(-2px); }
-
-  /* Blog post cards — ready for when posts are added */
+  .page-header { position: relative; z-index: 1; padding: 10rem 3rem 4rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  .page-eyebrow { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.9; letter-spacing: 0.04em; opacity: 0; animation: fadeUp 0.9s 0.4s forwards; }
+  .page-desc { margin-top: 1.5rem; font-size: 0.8rem; line-height: 1.9; color: var(--muted); max-width: 500px; opacity: 0; animation: fadeUp 0.9s 0.6s forwards; }
+  .blog-container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem 6rem; }
   .post-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-
-  .post-card {
-    background: var(--surface);
-    padding: 2rem;
-    display: grid; grid-template-columns: 1fr auto;
-    align-items: start; gap: 2rem;
-    text-decoration: none; color: inherit;
-    transition: background 0.2s;
-  }
+  .post-card { background: var(--surface); padding: 2rem; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 2rem; text-decoration: none; color: inherit; transition: background 0.2s; cursor: pointer; }
   .post-card:hover { background: #0f1520; }
   .post-card:hover .post-title { color: var(--accent); }
-
-  .post-tag {
-    display: inline-block;
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent); border: 1px solid var(--border);
-    padding: 0.2rem 0.5rem; margin-bottom: 0.75rem;
-  }
-
-  .post-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem; letter-spacing: 0.05em;
-    transition: color 0.2s;
-  }
-
-  .post-excerpt {
-    font-size: 0.75rem; line-height: 1.8; color: var(--muted);
-    margin-top: 0.5rem;
-  }
-
-  .post-date {
-    font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted);
-    white-space: nowrap; padding-top: 0.25rem;
-  }
-
-  .post-arrow {
-    font-size: 1.2rem; color: var(--accent); opacity: 0;
-    transition: opacity 0.2s; margin-top: 0.25rem;
-  }
+  .post-tag { display: inline-block; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border); padding: 0.2rem 0.5rem; margin-bottom: 0.75rem; }
+  .post-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; transition: color 0.2s; }
+  .post-excerpt { font-size: 0.75rem; line-height: 1.8; color: var(--muted); margin-top: 0.5rem; }
+  .post-meta { text-align: right; }
+  .post-date { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap; }
+  .post-arrow { font-size: 1.2rem; color: var(--accent); opacity: 0; transition: opacity 0.2s; margin-top: 0.5rem; display: block; }
   .post-card:hover .post-arrow { opacity: 1; }
+  .loading { text-align: center; padding: 4rem; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.15em; }
+  .empty-state { border: 1px solid var(--border); background: var(--surface); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .empty-state::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); }
+  .empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .empty-desc { font-size: 0.75rem; line-height: 1.9; color: var(--muted); max-width: 380px; margin: 0 auto; }
 
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 1rem;
-  }
+  /* Single post view */
+  .post-view { display: none; position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 10rem 3rem 6rem; }
+  .post-view.active { display: block; }
+  .blog-list.hidden { display: none; }
+  .back-btn { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-family: 'Space Mono', monospace; transition: all 0.2s; margin-bottom: 3rem; display: inline-block; }
+  .back-btn:hover { border-color: var(--accent); background: var(--glow); }
+  .post-full-tag { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border); padding: 0.2rem 0.5rem; display: inline-block; margin-bottom: 1rem; }
+  .post-full-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.95; letter-spacing: 0.04em; margin-bottom: 1rem; }
+  .post-full-date { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .post-full-body { font-size: 0.85rem; line-height: 2; color: #c8cad0; }
+  .post-full-body p { margin-bottom: 1.5rem; }
+  .post-full-body h1, .post-full-body h2, .post-full-body h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; color: var(--text); margin: 2rem 0 1rem; }
+  .post-full-body h2 { font-size: 2rem; }
+  .post-full-body h3 { font-size: 1.5rem; }
+  .post-full-body strong { color: var(--text); }
+  .post-full-body a { color: var(--accent); }
+  .post-full-body ul, .post-full-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+  .post-full-body li { margin-bottom: 0.5rem; }
 
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em; color: var(--muted); }
   .footer-copy { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-
 <nav>
-  <a href="index.html" class="nav-logo">Ghost Signal Studios</a>
+  <a href="Index.html" class="nav-logo">Ghost Signal Studios</a>
   <ul class="nav-links">
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#work">Work</a></li>
+    <li><a href="Index.html#about">About</a></li>
+    <li><a href="Index.html#work">Work</a></li>
     <li><a href="blog.html" class="active">Blog</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="Index.html#contact">Contact</a></li>
   </ul>
 </nav>
 
-<div class="page-header">
-  <p class="page-eyebrow">// Transmission Log</p>
-  <h1 class="page-title">The Blog</h1>
-  <p class="page-desc">Game coverage, opinions, deep dives, and dispatches from Ghost Signal Studios. New posts coming soon.</p>
+<div class="blog-list" id="blogList">
+  <div class="page-header">
+    <p class="page-eyebrow">// Transmission Log</p>
+    <h1 class="page-title">The Blog</h1>
+    <p class="page-desc">Game coverage, opinions, deep dives, and dispatches from Ghost Signal Studios.</p>
+  </div>
+  <div class="blog-container">
+    <div id="postsContainer"><div class="loading">// Loading transmissions...</div></div>
+  </div>
 </div>
 
-<div class="blog-container">
-  <div class="empty-state">
-    <span class="empty-icon">//</span>
-    <h2 class="empty-title">Signal Incoming</h2>
-    <p class="empty-desc">No posts yet — but the first transmission is on its way. Check back soon or follow on socials to know when it drops.</p>
-    <a href="https://x.com/ghostsigstudios" target="_blank" class="btn btn-ghost">Follow on X</a>
-  </div>
+<div class="post-view" id="postView">
+  <button class="back-btn" onclick="showList()">← Back to Blog</button>
+  <div id="postContent"></div>
 </div>
 
 <footer>
   <span class="footer-logo">Ghost Signal Studios LLC</span>
-  <span class="footer-copy">&copy; 2025 Ghost Signal Studios LLC &mdash; Fairfield, Ohio</span>
+  <span class="footer-copy">&copy; 2025 Ghost Signal Studios LLC &mdash; Ohio</span>
 </footer>
 
+<script>
+const REPO = 'ghostsignalstudios-svg/ghostsignalsite';
+const POSTS_PATH = 'GhostsignalstudiosWebsite/posts';
+const API = `https://api.github.com/repos/${REPO}/contents/${POSTS_PATH}`;
+
+function parseFrontmatter(text) {
+  const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) return { data: {}, content: text };
+  const data = {};
+  match[1].split('\n').forEach(line => {
+    const [key, ...val] = line.split(':');
+    if (key) data[key.trim()] = val.join(':').trim().replace(/^["']|["']$/g, '');
+  });
+  return { data, content: match[2].trim() };
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+async function loadPosts() {
+  try {
+    const res = await fetch(API);
+    const files = await res.json();
+    if (!Array.isArray(files) || files.length === 0) {
+      showEmpty(); return;
+    }
+    const mdFiles = files.filter(f => f.name.endsWith('.md')).reverse();
+    if (mdFiles.length === 0) { showEmpty(); return; }
+
+    const posts = await Promise.all(mdFiles.map(async f => {
+      const r = await fetch(f.download_url);
+      const text = await r.text();
+      const { data, content } = parseFrontmatter(text);
+      return { ...data, content, slug: f.name };
+    }));
+
+    const container = document.getElementById('postsContainer');
+    container.innerHTML = '<div class="post-grid">' + posts.map(p => `
+      <div class="post-card" onclick="showPost(${JSON.stringify(p).split('"').join('&quot;')})">
+        <div>
+          <span class="post-tag">${p.tag || 'Post'}</span>
+          <div class="post-title">${p.title || 'Untitled'}</div>
+          <p class="post-excerpt">${p.excerpt || ''}</p>
+        </div>
+        <div class="post-meta">
+          <div class="post-date">${formatDate(p.date)}</div>
+          <span class="post-arrow">→</span>
+        </div>
+      </div>`).join('') + '</div>';
+  } catch(e) {
+    showEmpty();
+  }
+}
+
+function showEmpty() {
+  document.getElementById('postsContainer').innerHTML = `
+    <div class="empty-state">
+      <h2 class="empty-title">Signal Incoming</h2>
+      <p class="empty-desc">No posts yet — but the first transmission is on its way.</p>
+    </div>`;
+}
+
+function showPost(p) {
+  document.getElementById('blogList').classList.add('hidden');
+  const view = document.getElementById('postView');
+  view.classList.add('active');
+  document.getElementById('postContent').innerHTML = `
+    <span class="post-full-tag">${p.tag || 'Post'}</span>
+    <h1 class="post-full-title">${p.title || 'Untitled'}</h1>
+    <div class="post-full-date">${formatDate(p.date)}</div>
+    <div class="post-full-body">${marked.parse(p.content || '')}</div>`;
+  window.scrollTo(0, 0);
+}
+
+function showList() {
+  document.getElementById('blogList').classList.remove('hidden');
+  document.getElementById('postView').classList.remove('active');
+  window.scrollTo(0, 0);
+}
+
+loadPosts();
+</script>
 </body>
 </html>
