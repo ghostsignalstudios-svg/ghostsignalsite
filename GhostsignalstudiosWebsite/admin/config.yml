@@ -2,8 +2,6 @@ backend:
   name: github
   repo: ghostsignalstudios-svg/ghostsignalsite
   branch: main
-  base_url: https://ghostsignalstudios.com
-  auth_endpoint: api/auth
 
 media_folder: "GhostsignalstudiosWebsite/images/uploads"
 public_folder: "/images/uploads"
