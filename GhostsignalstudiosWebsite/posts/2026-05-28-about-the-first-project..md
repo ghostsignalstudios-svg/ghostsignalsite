@@ -1,6 +1,6 @@
 ---
 title: About the first project.
-date: 2026-05-28T00:22:00
+date: 2026-06-13T02:22
 tag: News
 excerpt: The first Ghost Signal Studios game is officially in production.
 ---
