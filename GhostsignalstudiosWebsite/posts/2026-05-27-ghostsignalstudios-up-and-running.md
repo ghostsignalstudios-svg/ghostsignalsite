@@ -1,6 +1,6 @@
 ---
 title: ghostsignalstudios up and running!
-date: 2026-05-27T03:00:00
+date: 2026-06-13T02:22
 tag: Getting started
 excerpt: Sharing about the future.
 ---
